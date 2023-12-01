@@ -6,6 +6,7 @@ const App = () => {
 
   const [todoEditing, setTodoEditing] = useState(null);
 
+  // Default action when adding a new task
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -23,11 +24,14 @@ const App = () => {
     }
     document.getElementById('todoAdd').value = ""
   }
+
+  // Delete task
   function deleteTodo(id) {
     let updatedTodos = [...todos].filter((todo) => todo.id !== id);
     setTodos(updatedTodos);
   }
 
+  // Toggle for task completion
   function toggleComplete(id) {
     let updatedTodos = [...todos].map((todo) => {
       if (todo.id === id) {
@@ -38,6 +42,7 @@ const App = () => {
     setTodos(updatedTodos);
   }
 
+  // Change state of task to be edited
   function submitEdits(newtodo) {
     const updatedTodos = [...todos].map((todo) => {
       if (todo.id === newtodo.id) {
@@ -49,6 +54,7 @@ const App = () => {
       setTodoEditing(null);
     }
 
+    // Store tasks in local storage as JSON
     useEffect(() => {
         const json = localStorage.getItem("todos");
         const loadedTodos = JSON.parse(json);
